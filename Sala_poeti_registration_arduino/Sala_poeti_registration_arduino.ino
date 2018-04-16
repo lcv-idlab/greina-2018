@@ -26,7 +26,7 @@ const int pinL1 = 2;
 const int pinL2 = 3;
 
 // main lamp status
-boolean lamps = false;  // false = right, true = left
+boolean lamps = false;  // false = right, Tuor, true = left, Lavizzari
 
 // message coming from processing
 int message;
@@ -63,8 +63,8 @@ void loop() {
   if(Serial.available() > 0) {
     message = Serial.read();
     
-    if(message == 1) lamps = true;
-    else if (message == 0) lamps = false;
+    if(message == 1) lamps = true;    // Lavizzari, Left
+    else if (message == 0) lamps = false;   // Tuor, Right
   
   }
 
@@ -84,14 +84,14 @@ void loop() {
   lampUpdate();
 
 
-  digitalWrite(13, lamps);
+  digitalWrite(13, !lamps);
   
 }
 
 // lantern flickering
 void lampUpdate() {
 
-  if(lamps) {
+  if(!lamps) {    // switch on with right Tuor
 
     brightness = random(5, 10);
     

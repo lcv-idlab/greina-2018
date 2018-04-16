@@ -29,40 +29,37 @@ void setup() {
   
   // start the communication with Arduino
   String portName = Serial.list()[0];
-  Port = new Serial(this, portName, 9600);  
+  Port = new Serial(this, portName, 9600);
   
-  for(int i=0; i<Serial.list().length; i++) {
-    println(Serial.list()[i]);
-  }
+  printArray(Serial.list());
  
   minim = new Minim(this);
   
   files = new AudioPlayer[2];
-  files[0] = minim.loadFile("1.mp3", 1024);
-  files[1] = minim.loadFile("2.mp3", 1024);
+  files[0] = minim.loadFile("Tuor.wav", 1024);
+  files[1] = minim.loadFile("Lavizzari.wav", 1024);
+  //files[0] = minim.loadFile("1.mp3", 1024);
+  //files[1] = minim.loadFile("2.mp3", 1024);
   
   background(0);
   
-  while(!(Port.available() > 0)) {
-    println("Arduino not detected jet...");
-  }
+  delay(3000);
   
   files[0].play();
   
+  Port.write(cur);
 
 }
 
 void draw() {
   
-  // Arduino communication
-  if( Port.available() > 0) {
+  // Arduino communication anc changing track
     if(!files[cur].isPlaying()) {
       files[cur].pause();
       files[cur].rewind();
       cur = 1 - cur;
       files[cur].play();
       println(cur);
+      Port.write(cur);
     }
-    Port.write(cur);
-  }
 }
