@@ -12,7 +12,7 @@ import processing.serial.*;
 Serial Port;  // create a object for the serial class
 String val;  // value sent by the Arduino
 
-String[] imagesNames = {"1.png", "2.png", "3.png", "4.png", "5.png", "6.png"};
+String[] imagesNames = {"01.png", "02.png", "03.png", "04.png", "05.png", "06.png", "07.png", "08.png", "09.png", "10.png", "11.png", "12.png", "13.png", "14.png"};
 int imagesCount = imagesNames.length;
 PImage[] images = new PImage[imagesCount];
 
