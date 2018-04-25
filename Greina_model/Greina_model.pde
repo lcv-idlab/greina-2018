@@ -32,16 +32,17 @@ int fps = 60;  // sketch fps, used to calculate the alpha fading increments
 
 
 void setup() {
-  //fullScreen();
+  fullScreen(P2D);
   noCursor();
   frameRate(fps);
-  size(1920, 1080, P2D);
+  //size(1920, 1080, P2D);
   background(0);
   noStroke();
   noFill();
   
   // start the communication with Arduino
-  String portName = Serial.list()[0];
+  printArray(Serial.list());
+  String portName = Serial.list()[7];
   Port = new Serial(this, portName, 9600);
   
   // load all the images
@@ -62,12 +63,12 @@ void draw() {
   
   if(val != null && !fade_out) {
     
-    if(val.equals("2")) {
+    if(val.equals("1")) {
       println("next");
       old_pos = pos;
       pos++;
       resetDemo();
-    } else if(val.equals("1")) {
+    } else if(val.equals("2")) {
       println("previous");
       old_pos = pos;
       pos--;
